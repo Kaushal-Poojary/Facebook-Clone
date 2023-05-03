@@ -20,6 +20,10 @@ class _SignupState extends State<Signup> {
   TextEditingController _dateController = TextEditingController();
   final validate = GlobalKey<FormState>();
 
+  Pattern pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  Pattern mobilePattern = r'^[0-9]{10}$';
+
   // Toggle password visibility
   bool _obscureText = true;
 
@@ -37,9 +41,6 @@ class _SignupState extends State<Signup> {
 
   void _createUser() async {
     try {
-      print('$_email and $_password before');
-      UserCredential user = await _create.createUserWithEmailAndPassword(
-          email: _email, password: _password);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('User account created successfully'),
@@ -140,11 +141,19 @@ class _SignupState extends State<Signup> {
                     child: TextFormField(
                       onChanged: (value) => _email = value,
                       validator: (value) {
-                        print(value);
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your contact or email address';
+                          return 'Please enter your contact details';
+                        } else {
+                          RegExp emailRegex = new RegExp(pattern.toString());
+                          RegExp mobileRegex =
+                              new RegExp(mobilePattern.toString());
+                          if (emailRegex.hasMatch(value) ||
+                              mobileRegex.hasMatch(value)) {
+                            return null;
+                          } else {
+                            return 'Please enter a valid email address or mobile number';
+                          }
                         }
-                        return null;
                       },
                       decoration: InputDecoration(
                         hintText: 'Mobile number or email address',
@@ -171,7 +180,9 @@ class _SignupState extends State<Signup> {
                       validator: (value) {
                         print(value);
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
+                          return 'Please enter your Password';
+                        } else if (value.length < 8) {
+                          return 'Password must be at least 8 characters';
                         }
                         return null;
                       },

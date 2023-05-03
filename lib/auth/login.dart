@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
   final validate = GlobalKey<FormState>();
   Pattern pattern =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  Pattern mobilePattern = r'^[0-9]{10}$';
 
   final _formKey = GlobalKey<FormState>();
   String _email = "", _password = "";
@@ -100,14 +101,20 @@ class _LoginState extends State<Login> {
                         child: TextFormField(
                           onChanged: (value) => _email = value,
                           validator: (value) {
-                            print(value);
-                            RegExp regex = new RegExp(pattern.toString());
                             if (value == null || value.isEmpty) {
                               return 'Please enter your contact details';
-                            } else if (!regex.hasMatch(value)) {
-                              return 'Please enter a valid email address';
+                            } else {
+                              RegExp emailRegex =
+                                  new RegExp(pattern.toString());
+                              RegExp mobileRegex =
+                                  new RegExp(mobilePattern.toString());
+                              if (emailRegex.hasMatch(value) ||
+                                  mobileRegex.hasMatch(value)) {
+                                return null;
+                              } else {
+                                return 'Please enter a valid email address or mobile number';
+                              }
                             }
-                            return null;
                           },
                           decoration: InputDecoration(
                             hintText: 'Mobile number or email address',
