@@ -16,46 +16,15 @@ import 'package:facebook_clone/widget/stories.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final String email;
-  const ProfileScreen({required this.email, Key? key}) : super(key: key);
+  final String name;
+  const ProfileScreen({required this.name, Key? key}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-Future<String> getNameFromEmail(String email) async {
-  String fname = "", lname = "", full_name = "";
-  try {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: email)
-        .get();
-    querySnapshot.docs.forEach((doc) {
-      fname = doc.get('first_name');
-      lname = doc.get('last_name');
-      full_name = fname + " " + lname;
-    });
-  } catch (e) {
-    print(e);
-  }
-  return full_name;
-}
-
 class _ProfileScreenState extends State<ProfileScreen> {
   bool _isZoomed = false;
-
-  String name = "";
-
-  @override
-  void initState() {
-    super.initState();
-    getNameFromEmail(widget.email).then((value) {
-      setState(() {
-        name = value;
-        print(name);
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               // Name and username
                               Container(
                                 width: 360,
-                                child: Text(name,
+                                child: Text(widget.name,
                                     textAlign: TextAlign.left,
                                     style: GoogleFonts.roboto(
                                       color: Colors.black,

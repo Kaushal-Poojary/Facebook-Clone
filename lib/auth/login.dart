@@ -30,13 +30,6 @@ class _LoginState extends State<Login> {
 
   void _validateAndSubmit() async {
     try {
-      print('$_email and $_password before');
-      // UserCredential user = await _auth.signInWithEmailAndPassword(
-      //     email: _email, password: _password);
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => NavScreen()),
-      // );
 
       final CollectionReference membersCollection =
           FirebaseFirestore.instance.collection('members');
@@ -49,9 +42,13 @@ class _LoginState extends State<Login> {
 
         if (savedPassword == _password) {
           print('Login successful.');
+          // Get the name of the user
+          final String fname = member['first_name'];
+          final String lname = member['last_name'];
+          final String name = '$fname $lname';
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NavScreen(email: _email)),
+            MaterialPageRoute(builder: (context) => NavScreen(name: name)),
           );
         } else {
           print('Incorrect password.');

@@ -8,8 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class NavScreen extends StatefulWidget {
-  final String email;
-  const NavScreen({Key? key, required this.email}) : super(key: key);
+  final String name;
+  const NavScreen({Key? key, required this.name}) : super(key: key);
 
   @override
   State<NavScreen> createState() => _NavScreenState();
@@ -18,7 +18,7 @@ class NavScreen extends StatefulWidget {
 class _NavScreenState extends State<NavScreen> {
   final List<Widget> _children = [
     const HomeScreen(),
-    const ProfileScreen(email: ''),
+    const ProfileScreen(name: ''),
     const NotificationScreen(),
   ];
   final List<IconData> _icons = const [
@@ -31,7 +31,7 @@ class _NavScreenState extends State<NavScreen> {
   @override
   void initState() {
     super.initState();
-    _children[1] = ProfileScreen(email: widget.email);
+    _children[1] = ProfileScreen(name: widget.name);
   }
 
   @override
