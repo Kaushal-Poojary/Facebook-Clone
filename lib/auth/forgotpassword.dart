@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:facebook_clone/widget/forgot_password_app_bar.dart';
@@ -24,22 +23,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   String _email = '', _password = "";
 
-  // Function for signing up a new user in firebase
-
-  // Future<void> _resetPassword() async {
-  //   try {
-  //     await FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text('Password reset link sent to your email address'),
-  //       ),
-  //     );
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
   void _resetPassword() async {
     try {
       final CollectionReference membersCollection =
@@ -59,7 +42,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         await membersCollection
             .doc(documentSnapshot.id)
             .update({'password': _password});
-        // print('Password updated successfully.');
       } else {
         print('User not found.');
         ScaffoldMessenger.of(context).showSnackBar(
@@ -92,7 +74,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       color: Colors.white,
                       width: double.infinity,
                       height: 110,
-                      // alignment: Alignment.centerLeft,
                     ),
                     Container(
                         width: double.infinity,

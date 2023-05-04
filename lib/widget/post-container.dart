@@ -150,7 +150,7 @@ class _PostStats extends StatelessWidget {
               ),
             ),
             Text(
-              "${post.comments} likes",
+              "${post.comments} comments",
               style: TextStyle(color: Colors.grey[600]),
             ),
             const SizedBox(width: 8),

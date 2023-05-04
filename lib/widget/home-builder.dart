@@ -1,17 +1,13 @@
+// TODO: This page was built for displaying the home page using the data from the database. The code is still incomplete and needs to be updated. The code is not used in the app yet.
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facebook_clone/config/pallete.dart';
-import 'package:facebook_clone/data/data.dart';
 import 'package:facebook_clone/widget/profile-avatar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 
-import 'package:facebook_clone/widget/post-container.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomeBuilder extends StatefulWidget {

@@ -56,7 +56,7 @@ class _NavScreenState extends State<NavScreen> {
                 ),
                 floating: false,
                 actions: [
-                  CircleButton1(
+                  CircleButton(
                       icon: Icons.search, iconSize: 30, onPressed: () {}),
                   Container(
                     // Apply margin to the container

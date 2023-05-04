@@ -1,6 +1,5 @@
 import 'package:facebook_clone/widget/profile-avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 // Data imports
 import 'package:facebook_clone/data/data.dart';

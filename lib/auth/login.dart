@@ -21,7 +21,6 @@ class _LoginState extends State<Login> {
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   Pattern mobilePattern = r'^[0-9]{10}$';
 
-  final _formKey = GlobalKey<FormState>();
   String _email = "", _password = "";
   final FirebaseAuth _auth = FirebaseAuth.instance;
 

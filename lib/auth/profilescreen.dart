@@ -1,5 +1,4 @@
 // Core imports
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:facebook_clone/auth/forgotpassword.dart';
 import 'package:facebook_clone/auth/login.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +8,7 @@ import 'package:facebook_clone/config/pallete.dart';
 import 'package:facebook_clone/data/data.dart';
 
 // Widgets import
-import 'package:facebook_clone/widget/create-post-container.dart';
 import 'package:facebook_clone/widget/post-container.dart';
-import 'package:facebook_clone/widget/rooms.dart';
-import 'package:facebook_clone/widget/stories.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -470,7 +466,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             SingleChildScrollView(
-              // physics: NeverScrollableScrollPhysics(),
               child: Column(
                 children:
                     posts.map((post) => PostContainer(post: post)).toList(),

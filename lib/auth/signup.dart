@@ -36,8 +36,6 @@ class _SignupState extends State<Signup> {
   DateTime? pickeddate = null;
   String _email = '', _password = "", f_name = "", l_name = "";
 
-  // Function for signing up a new user in firebase
-  final FirebaseAuth _create = FirebaseAuth.instance;
 
   void _createUser() async {
     try {

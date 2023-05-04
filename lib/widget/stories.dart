@@ -93,13 +93,11 @@ class _StoryCard extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: FittedBox(
-                    // fit: BoxFit.contain,
                     child: IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.add),
                       iconSize: 30,
                       color: Palette.facebookBlue,
-                      // alignment: Alignment.center,
                     ),
                   ),
                 )

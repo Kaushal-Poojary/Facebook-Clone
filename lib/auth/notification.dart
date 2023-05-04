@@ -14,7 +14,7 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
-    final List<User> firstTwoUsers =
+    final List<User> firstSixUsers =
         onlineUsers.isNotEmpty ? onlineUsers.sublist(0, 6) : [];
 
     return MaterialApp(
@@ -60,10 +60,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 height: 5,
               ),
               Column(
-                children: firstTwoUsers.map((user) {
+                children: firstSixUsers.map((user) {
                   final name = user.name;
                   final imageUrl = user.imageUrl;
-                  final index = firstTwoUsers.indexOf(user);
+                  final index = firstSixUsers.indexOf(user);
                   final text = index == 0 || index == 3 || index == 6
                       ? ' reacted to your post'
                       : ' commented on your post';

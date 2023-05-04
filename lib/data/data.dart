@@ -236,7 +236,7 @@ final List<Post> posts = [
   Post(
     user: onlineUsers[0],
     caption:
-        'More placeholder text for the soul: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        'A warm welcome to each one of you. Lets rock and roll with our new app. I am Salman Khan, your host for the day. Lets get started. And yes, dont forget to like and share this post. Thank you.',
     timeAgo: '1d',
     imageUrl: "",
     likes: 482,

@@ -1,6 +1,5 @@
 import 'package:facebook_clone/config/pallete.dart';
 import 'package:facebook_clone/widget/profile-avatar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Data imports
@@ -61,7 +60,6 @@ class _CreateRoomButton extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
-      // textColor: Colors.blueAccent,
       child: Row(
         children: [
           // Shader mask is used to apply gradient to the icon
