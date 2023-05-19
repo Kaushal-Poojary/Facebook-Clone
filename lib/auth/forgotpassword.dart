@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:facebook_clone/widget/forgot_password_app_bar.dart';
 import 'package:facebook_clone/auth/login.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -14,8 +15,6 @@ class ForgotPassword extends StatefulWidget {
 // Forget password page
 class _ForgotPasswordState extends State<ForgotPassword> {
   final validate = GlobalKey<FormState>();
-  Pattern pattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
   // Toggle password visibility
   bool _obscureText = true;
@@ -38,6 +37,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             content: Text('Password Updated Successfully'),
           ),
         );
+        final key = encrypt.Key.fromUtf8('my 32 length key................');
+        final iv = encrypt.IV.fromLength(16);
+        final encrypter = encrypt.Encrypter(encrypt.AES(key));
+        final encrypted = encrypter.encrypt(_password, iv: iv);
+        _password = encrypted.base64;
+
         final DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
         await membersCollection
             .doc(documentSnapshot.id)
@@ -80,12 +85,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         child: TextFormField(
                           onChanged: (value) => _email = value.trim(),
                           validator: (value) {
-                            RegExp regex = new RegExp(pattern.toString());
                             print(value);
                             if (value == null || value.isEmpty) {
                               return 'Please enter your mobile number or email address';
-                            } else if (!regex.hasMatch(value)) {
-                              return 'Please enter a valid email address';
                             }
                             return null;
                           },

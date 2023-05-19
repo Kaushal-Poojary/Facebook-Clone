@@ -7,6 +7,7 @@ import 'package:facebook_clone/widget/login_app_bar.dart';
 import 'package:facebook_clone/auth/signup.dart';
 import 'package:facebook_clone/auth/forgotpassword.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -29,7 +30,6 @@ class _LoginState extends State<Login> {
 
   void _validateAndSubmit() async {
     try {
-
       final CollectionReference membersCollection =
           FirebaseFirestore.instance.collection('members');
       final QuerySnapshot querySnapshot =
@@ -39,7 +39,13 @@ class _LoginState extends State<Login> {
         final DocumentSnapshot member = querySnapshot.docs.first;
         final String savedPassword = member['password'];
 
-        if (savedPassword == _password) {
+        // Decrypt the saved password
+        final key = encrypt.Key.fromUtf8('my 32 length key................');
+        final iv = encrypt.IV.fromLength(16);
+        final encrypter = encrypt.Encrypter(encrypt.AES(key));
+        final decrypted = encrypter.decrypt64(savedPassword, iv: iv);
+
+        if (decrypted == _password) {
           print('Login successful.');
           // Get the name of the user
           final String fname = member['first_name'];

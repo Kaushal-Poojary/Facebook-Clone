@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:facebook_clone/widget/signup_app_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:facebook_clone/auth/login.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -48,6 +49,13 @@ class _SignupState extends State<Signup> {
         context,
         MaterialPageRoute(builder: (context) => Login()),
       );
+
+      // Store the password in encrypted form
+      final key = encrypt.Key.fromUtf8('my 32 length key................');
+      final iv = encrypt.IV.fromLength(16);
+      final encrypter = encrypt.Encrypter(encrypt.AES(key));
+      final encrypted = encrypter.encrypt(_password, iv: iv);
+      _password = encrypted.base64;
 
       // Code to submit data to firebase
       await FirebaseFirestore.instance.collection('members').doc().set({
